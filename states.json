@@ -1,0 +1,10 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.56.9 76e5016d",
+  "osm3s": {
+    "timestamp_osm_base": "2021-08-15T13:30:43Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [],
+  "remark": "runtime error: Query timed out in \"query\" at line 10 after 26 seconds."
+}
