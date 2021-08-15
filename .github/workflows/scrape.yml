@@ -16,7 +16,7 @@ jobs:
         fetch-depth: 0
     - name: Fetch latest data
       run: |-
-        curl https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A25000%5D%3B%0A%2F%2F%20gather%20results%0A%28%0A%20%20%2F%2F%20query%20part%20for%3A%20%E2%80%9Camenity%3Dpost_box%E2%80%9D%0A%20%20node%5B%22amenity%22%3D%22post_box%22%5D%3B%0A%20%20way%5B%22amenity%22%3D%22post_box%22%5D%3B%0A%20%20relation%5B%22amenity%22%3D%22post_box%22%5D%3B%0A%29%3B%0A%2F%2F%20print%20results%0Aout%20body%3B%0A%3E%3B%0Aout%20skel%20qt%3B | jq . > states.json
+        curl https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A25000%5D%3B%0A%2F%2F%20gather%20results%0A%28%0A%20%20%2F%2F%20query%20part%20for%3A%20%E2%80%9Camenity%3Dpost_box%E2%80%9D%0A%20%20node%5B%22amenity%22%3D%22post_box%22%5D%3B%0A%20%20way%5B%22amenity%22%3D%22post_box%22%5D%3B%0A%20%20relation%5B%22amenity%22%3D%22post_box%22%5D%3B%0A%29%3B%0A%2F%2F%20print%20results%0Aout%20body%3B%0A%3E%3B%0Aout%20skel%20qt%3B | jq . > post_boxes.json
     - name: Commit and push if it changed
       run: |-
         git config user.name "Automated"
@@ -45,15 +45,15 @@ jobs:
       env:
         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       run: |-
-        datasette publish vercel cdc.db \
-          --title "CDC vaccination numbers" \
-          --about "simonw/cdc-vaccination-history" \
-          --about_url "https://github.com/simonw/cdc-vaccination-history" \
-          --source "CDC" \
-          --source_url "https://covid.cdc.gov/covid-data-tracker/#vaccinations" \
+        datasette publish vercel post_boxes.db \
+          --title "Post boxes on OSM" \
+          --about "nicolelaine/postboxes-history" \
+          --about_url "https://github.com/nicolelaine/postboxes-history" \
+          --source "OSM" \
+          --source_url "https://openstreetmap.org" \
           --install datasette-vega \
           --install datasette-graphql \
-          --project cdc-vaccination-history \
+          --project postboxes-history \
           --token $VERCEL_TOKEN \
           --extra-options "--setting sql_time_limit_ms 5000 --facet_time_limit_ms 3000"
 
