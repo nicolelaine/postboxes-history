@@ -25,36 +25,4 @@ jobs:
         timestamp=$(date -u)
         git commit -m "Latest data: ${timestamp}" || exit 0
         git push
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - uses: actions/cache@v2
-      name: Configure pip caching
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Install Python dependencies
-      run: |-
-        pip install -r requirements.txt
-    - name: Build SQLite database
-      run: python build_database.py
-    - name: Deploy database to Vercel
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      run: |-
-        datasette publish vercel post_boxes.db \
-          --title "Post boxes on OSM" \
-          --about "nicolelaine/postboxes-history" \
-          --about_url "https://github.com/nicolelaine/postboxes-history" \
-          --source "OSM" \
-          --source_url "https://openstreetmap.org" \
-          --install datasette-vega \
-          --install datasette-graphql \
-          --project postboxes-history \
-          --token $VERCEL_TOKEN \
-          --extra-options "--setting sql_time_limit_ms 5000 --facet_time_limit_ms 3000"
-
-
+    
