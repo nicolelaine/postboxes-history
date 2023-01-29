@@ -2,9 +2,9 @@
   "version": 0.6,
   "generator": "Overpass API 0.7.59 e21c39fe",
   "osm3s": {
-    "timestamp_osm_base": "2023-01-22T14:04:39Z",
+    "timestamp_osm_base": "2023-01-29T14:03:55Z",
     "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
   },
   "elements": [],
-  "remark": "runtime error: open64: 607984 Unknown error 607984 /ssd/osm3s/db/nodes.bin File_Blocks::read_block: Index inconsistent at offset 39844839432"
+  "remark": "runtime error: open64: 1181966 Unknown error 1181966 /ssd/osm3s/db/nodes.bin File_Blocks::read_block: Index inconsistent at offset 77461323784"
 }
